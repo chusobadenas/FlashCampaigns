@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="btn_text_retry">Volver</string>
+  <string name="exception_message_generic">Ha ocurrido un error en la aplicación</string>
+</resources>

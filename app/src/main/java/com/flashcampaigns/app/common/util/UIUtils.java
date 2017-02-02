@@ -35,7 +35,7 @@ public final class UIUtils {
   }
 
   /**
-   * Shows a {@link android.widget.Toast} message.
+   * Shows a {@link Toast} message.
    *
    * @param context the context.
    * @param message a string representing a message to be shown.

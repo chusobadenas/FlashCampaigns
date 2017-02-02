@@ -26,29 +26,29 @@ public class JobExecutor implements ThreadExecutor {
   // Sets the Time Unit to seconds
   private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
 
-  private final ThreadPoolExecutor mThreadPoolExecutor;
+  private final ThreadPoolExecutor threadPoolExecutor;
 
   @Inject
   public JobExecutor() {
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
     ThreadFactory threadFactory = new JobThreadFactory();
-    mThreadPoolExecutor = new ThreadPoolExecutor(INITIAL_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME,
+    threadPoolExecutor = new ThreadPoolExecutor(INITIAL_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME,
         KEEP_ALIVE_TIME_UNIT, workQueue, threadFactory);
   }
 
   @Override
   public void execute(@NonNull Runnable runnable) {
-    mThreadPoolExecutor.execute(runnable);
+    threadPoolExecutor.execute(runnable);
   }
 
   private static class JobThreadFactory implements ThreadFactory {
 
     private static final String THREAD_NAME = "android_";
-    private int mCounter = 0;
+    private int counter = 0;
 
     @Override
     public Thread newThread(@NonNull Runnable runnable) {
-      return new Thread(runnable, THREAD_NAME + mCounter++);
+      return new Thread(runnable, THREAD_NAME + counter++);
     }
   }
 }

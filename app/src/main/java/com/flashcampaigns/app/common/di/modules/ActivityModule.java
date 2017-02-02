@@ -13,7 +13,7 @@ import dagger.Provides;
 @Module
 public class ActivityModule {
 
-  private final Activity mActivity;
+  private final Activity activity;
 
   /**
    * Constructor
@@ -21,7 +21,7 @@ public class ActivityModule {
    * @param activity the activity
    */
   public ActivityModule(Activity activity) {
-    this.mActivity = activity;
+    this.activity = activity;
   }
 
   /**
@@ -29,7 +29,7 @@ public class ActivityModule {
    */
   @Provides
   @PerActivity
-  Activity activity() {
-    return mActivity;
+  public Activity activity() {
+    return activity;
   }
 }

@@ -3,7 +3,6 @@ package com.flashcampaigns.app.presentation.main;
 import com.flashcampaigns.app.AndroidApplicationTest;
 import com.flashcampaigns.app.BuildConfig;
 import com.flashcampaigns.app.data.entity.Campaign;
-import com.flashcampaigns.app.data.entity.Product;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +25,7 @@ public class CampaignAdapterTest {
 
   @Before
   public void setUp() {
-    Product product = Product.create(1, "My Product", "Awesome product", "url", null, null);
-    Campaign campaign = Campaign.create(1, "My Campaign", "01-01-2017", "01-01-2018", "url", Collections.singletonList(product));
+    Campaign campaign = Campaign.create(1, "My Campaign", "01-01-2017", "01-01-2018", "url");
     List<Campaign> campaigns = Collections.singletonList(campaign);
 
     adapter = new CampaignAdapter(RuntimeEnvironment.application, campaigns);

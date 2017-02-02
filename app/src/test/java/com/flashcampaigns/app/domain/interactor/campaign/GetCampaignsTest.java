@@ -3,7 +3,6 @@ package com.flashcampaigns.app.domain.interactor.campaign;
 import com.flashcampaigns.app.common.executor.PostExecutionThread;
 import com.flashcampaigns.app.common.executor.ThreadExecutor;
 import com.flashcampaigns.app.data.entity.Campaign;
-import com.flashcampaigns.app.data.entity.Product;
 import com.flashcampaigns.app.domain.repository.CampaignRepository;
 
 import org.junit.Before;
@@ -41,8 +40,7 @@ public class GetCampaignsTest {
 
   @Test
   public void testGetCampaignsSuccess() {
-    Product product = Product.create(1, "My Product", "Awesome product", "url", null, null);
-    Campaign campaign = Campaign.create(1, "My Campaign", "01-01-2017", "01-01-2018", "url", Collections.singletonList(product));
+    Campaign campaign = Campaign.create(1, "My Campaign", "01-01-2017", "01-01-2018", "url");
     List<Campaign> campaigns = Collections.singletonList(campaign);
     Observable<List<Campaign>> observable = Observable.just(campaigns);
     when(campaignRepository.getCampaigns()).thenReturn(observable);

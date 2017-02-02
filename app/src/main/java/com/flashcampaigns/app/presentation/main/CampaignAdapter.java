@@ -56,7 +56,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Campai
     // Populate the row on the recycler view
     UIUtils.loadImageUrl(context, holder.imageView, campaign.imageUrl());
     holder.nameView.setText(campaign.name());
-    holder.endDateView.setText(campaign.endDate());
+    holder.endDateView.setText(campaign.endDate().toString());
   }
 
   /**

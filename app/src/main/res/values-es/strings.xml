@@ -2,4 +2,7 @@
 <resources>
   <string name="btn_text_retry">Volver</string>
   <string name="exception_message_generic">Ha ocurrido un error en la aplicación</string>
+  <string name="error_loading_campaigns">Ha ocurrido un error al intentar cargar las campañas</string>
+  <string name="campaigns_empty">No hay campañas</string>
+  <string name="campaigns_image_description">Imagen de campaña</string>
 </resources>

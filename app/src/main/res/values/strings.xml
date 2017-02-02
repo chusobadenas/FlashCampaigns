@@ -4,6 +4,11 @@
 
   <!-- Error messages -->
   <string name="exception_message_generic">There was an application error</string>
+  <string name="error_loading_campaigns">There was an error loading the campaigns</string>
+
+  <!-- Campaigns -->
+  <string name="campaigns_empty">No campaigns</string>
+  <string name="campaigns_image_description">Campaign image</string>
 
   <!-- Other -->
   <string name="btn_text_retry">Retry</string>

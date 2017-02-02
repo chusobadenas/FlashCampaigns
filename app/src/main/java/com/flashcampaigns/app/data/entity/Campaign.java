@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * Represents a campaign.
  */
@@ -18,15 +20,15 @@ public abstract class Campaign {
   public abstract String name();
 
   @SerializedName("start_date")
-  public abstract String startDate();
+  public abstract Date startDate();
 
   @SerializedName("end_date")
-  public abstract String endDate();
+  public abstract Date endDate();
 
   @SerializedName("image")
   public abstract String imageUrl();
 
-  public static Campaign create(int id, String name, String startDate, String endDate, String imageUrl) {
+  public static Campaign create(int id, String name, Date startDate, Date endDate, String imageUrl) {
     return new AutoValue_Campaign(id, name, startDate, endDate, imageUrl);
   }
 

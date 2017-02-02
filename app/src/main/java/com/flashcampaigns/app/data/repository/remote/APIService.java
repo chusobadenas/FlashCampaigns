@@ -1,7 +1,7 @@
 package com.flashcampaigns.app.data.repository.remote;
 
 import com.flashcampaigns.app.BuildConfig;
-import com.flashcampaigns.app.data.entity.Campaign;
+import com.flashcampaigns.app.data.entity.response.CampaignResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,8 +24,8 @@ public interface APIService {
   String API_BASE_URL = "https://dashboard.eelp.com/api/";
   String VERSION = "v1";
 
-  @GET(VERSION + "/flash_campaigns/")
-  Observable<List<Campaign>> getCampaigns();
+  @GET(VERSION + "/flash_campaigns")
+  Observable<List<CampaignResponse>> getCampaigns();
 
   /********
    * Helper class that sets up a new services

@@ -1,6 +1,8 @@
 package com.flashcampaigns.app.data.repository;
 
 import com.flashcampaigns.app.data.entity.Campaign;
+import com.flashcampaigns.app.data.entity.mapper.CampaignMapper;
+import com.flashcampaigns.app.data.entity.response.CampaignResponse;
 import com.flashcampaigns.app.data.repository.remote.APIService;
 
 import org.junit.Before;
@@ -27,14 +29,14 @@ public class CampaignDataRepositoryTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    campaignDataRepository = new CampaignDataRepository(apiService);
+    campaignDataRepository = new CampaignDataRepository(apiService, new CampaignMapper());
   }
 
   @Test
   public void testGetCampaignsSuccess() {
     // Create search
-    Campaign campaign = Campaign.create(1, "My campaign", "01-01-2017", "01-01-2018", "url");
-    Observable<List<Campaign>> search = Observable.just(Collections.singletonList(campaign));
+    CampaignResponse campaign = CampaignResponse.create(1, "My campaign", "01-01-2017", "01-01-2018", "url");
+    Observable<List<CampaignResponse>> search = Observable.just(Collections.singletonList(campaign));
 
     when(apiService.getCampaigns()).thenReturn(search);
 
@@ -48,8 +50,5 @@ public class CampaignDataRepositoryTest {
     assertEquals(campaigns.size(), 1);
     assertEquals(campaigns.get(0).id(), 1);
     assertEquals(campaigns.get(0).name(), "My campaign");
-    assertEquals(campaigns.get(0).startDate(), "01-01-2017");
-    assertEquals(campaigns.get(0).endDate(), "01-01-2018");
-    assertEquals(campaigns.get(0).imageUrl(), "url");
   }
 }

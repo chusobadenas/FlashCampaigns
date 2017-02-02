@@ -1,6 +1,7 @@
 package com.flashcampaigns.app.data.repository.remote;
 
 import com.flashcampaigns.app.BuildConfig;
+import com.flashcampaigns.app.data.entity.Product;
 import com.flashcampaigns.app.data.entity.response.CampaignResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -26,6 +28,9 @@ public interface APIService {
 
   @GET(VERSION + "/flash_campaigns")
   Observable<List<CampaignResponse>> getCampaigns();
+
+  @GET(VERSION + "/flash_campaigns/{id}/products")
+  Observable<List<Product>> getProducts(@Path("id") int campaignId);
 
   /********
    * Helper class that sets up a new services

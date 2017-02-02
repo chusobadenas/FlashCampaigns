@@ -16,4 +16,14 @@ interface MainMvpView extends MvpView {
    * @param campaigns the list of campaigns
    */
   void showCampaigns(List<Campaign> campaigns);
+
+  /**
+   * Shows a view indicating there is no campaigns to show.
+   */
+  void showEmpty();
+
+  /**
+   * Hides the empty view.
+   */
+  void hideEmpty();
 }

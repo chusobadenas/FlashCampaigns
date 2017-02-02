@@ -41,6 +41,8 @@ public class MainFragment extends BaseFragment implements MainMvpView {
   RelativeLayout progressView;
   @BindView(R.id.rl_retry)
   RelativeLayout retryView;
+  @BindView(R.id.rl_empty)
+  RelativeLayout emptyView;
 
   private Unbinder unbinder;
 
@@ -104,6 +106,18 @@ public class MainFragment extends BaseFragment implements MainMvpView {
   @Override
   public void hideRetry() {
     retryView.setVisibility(View.GONE);
+    mainView.setVisibility(View.VISIBLE);
+  }
+
+  @Override
+  public void showEmpty() {
+    mainView.setVisibility(View.GONE);
+    emptyView.setVisibility(View.VISIBLE);
+  }
+
+  @Override
+  public void hideEmpty() {
+    emptyView.setVisibility(View.GONE);
     mainView.setVisibility(View.VISIBLE);
   }
 

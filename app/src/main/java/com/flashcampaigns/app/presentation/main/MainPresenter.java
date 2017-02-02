@@ -73,6 +73,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
       // Show error
       Timber.e(errorBundle.getException(), "There was an error loading the campaigns");
       mvpView.hideLoading();
+      mvpView.showRetry();
       showErrorMessage(errorBundle);
     }
 
@@ -81,11 +82,19 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
       MainMvpView mvpView = getMvpView();
       mvpView.hideLoading();
 
-      // Sort campaigns by end date
-      Collections.sort(campaigns, dateComparator);
+      if (campaigns.isEmpty()) {
+        // Show empty view
+        mvpView.showEmpty();
+      } else {
+        // Hide empty view
+        mvpView.hideEmpty();
 
-      // Set values in the view
-      mvpView.showCampaigns(campaigns);
+        // Sort campaigns by end date
+        Collections.sort(campaigns, dateComparator);
+
+        // Set values in the view
+        mvpView.showCampaigns(campaigns);
+      }
     }
   }
 }

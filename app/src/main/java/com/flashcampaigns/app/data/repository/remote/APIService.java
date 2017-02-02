@@ -1,9 +1,11 @@
 package com.flashcampaigns.app.data.repository.remote;
 
 import com.flashcampaigns.app.BuildConfig;
+import com.flashcampaigns.app.data.entity.Campaign;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -11,13 +13,19 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import rx.Observable;
 
 /**
  * APIService for retrieving data from the network using Retrofit.
  */
 public interface APIService {
 
-  String API_BASE_URL = "PUT_YOUR_API_URL_HERE";
+  String API_BASE_URL = "https://dashboard.eelp.com/api/";
+  String VERSION = "v1";
+
+  @GET(VERSION + "/flash_campaigns/")
+  Observable<List<Campaign>> getCampaigns();
 
   /********
    * Helper class that sets up a new services

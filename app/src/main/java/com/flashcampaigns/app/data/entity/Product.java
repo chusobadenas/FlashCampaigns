@@ -1,10 +1,15 @@
-package com.flashcampaigns.app.data.entity.response;
+package com.flashcampaigns.app.data.entity;
+
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents a product.
+ */
 @AutoValue
 public abstract class Product {
 
@@ -20,9 +25,11 @@ public abstract class Product {
   @SerializedName("image")
   public abstract String imageUrl();
 
+  @Nullable
   @SerializedName("price")
   public abstract Double price();
 
+  @Nullable
   @SerializedName("list_price")
   public abstract Double listPrice();
 

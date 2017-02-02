@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
@@ -40,7 +41,7 @@ public class GetCampaignsTest {
 
   @Test
   public void testGetCampaignsSuccess() {
-    Campaign campaign = Campaign.create(1, "My Campaign", "01-01-2017", "01-01-2018", "url");
+    Campaign campaign = Campaign.create(1, "My Campaign", new Date(), new Date(), "url");
     List<Campaign> campaigns = Collections.singletonList(campaign);
     Observable<List<Campaign>> observable = Observable.just(campaigns);
     when(campaignRepository.getCampaigns()).thenReturn(observable);

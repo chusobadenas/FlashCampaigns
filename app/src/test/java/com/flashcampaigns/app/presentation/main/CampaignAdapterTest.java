@@ -12,6 +12,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +26,7 @@ public class CampaignAdapterTest {
 
   @Before
   public void setUp() {
-    Campaign campaign = Campaign.create(1, "My Campaign", "01-01-2017", "01-01-2018", "url");
+    Campaign campaign = Campaign.create(1, "My Campaign", new Date(), new Date(), "url");
     List<Campaign> campaigns = Collections.singletonList(campaign);
 
     adapter = new CampaignAdapter(RuntimeEnvironment.application, campaigns);

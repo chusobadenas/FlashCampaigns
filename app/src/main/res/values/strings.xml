@@ -9,6 +9,8 @@
   <!-- Campaigns -->
   <string name="campaigns_empty">No campaigns</string>
   <string name="campaigns_image_description">Campaign image</string>
+  <string name="campaigns_active">Active</string>
+  <string name="campaigns_inactive">Inactive</string>
 
   <!-- Other -->
   <string name="btn_text_retry">Retry</string>

@@ -5,4 +5,6 @@
   <string name="error_loading_campaigns">Ha ocurrido un error al intentar cargar las campañas</string>
   <string name="campaigns_empty">No hay campañas</string>
   <string name="campaigns_image_description">Imagen de campaña</string>
+  <string name="campaigns_active">Activas</string>
+  <string name="campaigns_inactive">Inactivas</string>
 </resources>

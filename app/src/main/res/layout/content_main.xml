@@ -10,7 +10,5 @@
       android:id="@+id/campaigns_list"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:divider="@color/divider"
-      android:dividerHeight="1dp"
       android:scrollbars="vertical"/>
 </LinearLayout>

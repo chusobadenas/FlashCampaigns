@@ -5,6 +5,7 @@
   <!-- Error messages -->
   <string name="exception_message_generic">There was an application error</string>
   <string name="error_loading_campaigns">There was an error loading the campaigns</string>
+  <string name="error_loading_products">There was an error loading the products</string>
 
   <!-- Campaigns -->
   <string name="campaigns_empty">No campaigns</string>

@@ -7,4 +7,5 @@
   <string name="campaigns_image_description">Imagen de campaña</string>
   <string name="campaigns_active">Activas</string>
   <string name="campaigns_inactive">Inactivas</string>
+  <string name="error_loading_products">Ha ocurrido un error al intentar cargar los productos</string>
 </resources>

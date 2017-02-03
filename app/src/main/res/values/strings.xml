@@ -13,6 +13,9 @@
   <string name="campaigns_active">Active</string>
   <string name="campaigns_inactive">Inactive</string>
 
+  <!-- Products -->
+  <string name="products_image_description">Product image</string>
+
   <!-- Other -->
   <string name="btn_text_retry">Retry</string>
 </resources>

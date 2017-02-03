@@ -20,47 +20,81 @@ import butterknife.ButterKnife;
 /**
  * This class defines the adapter of a {@link Campaign}
  */
-public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.CampaignHolder> {
+public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+  private static final int CAMPAIGN_STATUS_VIEW = 0;
+  private static final int CAMPAIGN_VIEW = 1;
 
   private final Context context;
-  private final List<Campaign> campaigns;
+  private final List<Object> items;
 
   /**
    * Constructor
    *
-   * @param context   the context
-   * @param campaigns the list of campaigns
+   * @param context the context
+   * @param items   the list of campaigns
    */
-  public CampaignAdapter(Context context, List<Campaign> campaigns) {
+  public CampaignAdapter(Context context, List<Object> items) {
     this.context = context;
-    this.campaigns = campaigns;
+    this.items = items;
   }
 
   @Override
   public int getItemCount() {
-    return campaigns.size();
+    return items.size();
   }
 
   @Override
-  public CampaignHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    // Inflate the layout and initialize the holder
-    View view = LayoutInflater.from(context).inflate(R.layout.custom_campaign, parent, false);
-    return new CampaignHolder(view);
+  public int getItemViewType(int position) {
+    return items.get(position) instanceof Campaign ? CAMPAIGN_VIEW : CAMPAIGN_STATUS_VIEW;
   }
 
   @Override
-  public void onBindViewHolder(CampaignHolder holder, int position) {
+  public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    RecyclerView.ViewHolder holder = null;
+    View view;
+
+    switch (viewType) {
+      case CAMPAIGN_STATUS_VIEW:
+        view = LayoutInflater.from(context).inflate(R.layout.custom_campaign_status, parent, false);
+        holder = new CampaignStatusHolder(view);
+        break;
+      case CAMPAIGN_VIEW:
+        view = LayoutInflater.from(context).inflate(R.layout.custom_campaign, parent, false);
+        holder = new CampaignHolder(view);
+        break;
+      default:
+        break;
+    }
+
+    return holder;
+  }
+
+  @Override
+  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     // Get item
-    Campaign campaign = campaigns.get(position);
+    Object item = items.get(position);
 
-    // Populate the row on the recycler view
-    UIUtils.loadImageUrl(context, holder.imageView, campaign.imageUrl());
-    holder.nameView.setText(campaign.name());
-    holder.endDateView.setText(campaign.endDate().toString());
+    if (item instanceof String) {
+      // Cast item
+      String status = (String) item;
+      // Set the status
+      CampaignStatusHolder campaignStatusHolder = (CampaignStatusHolder) holder;
+      campaignStatusHolder.statusView.setText(status);
+
+    } else if (item instanceof Campaign) {
+      // Cast item
+      Campaign campaign = (Campaign) item;
+      // Populate the row on the recycler view
+      CampaignHolder campaignHolder = (CampaignHolder) holder;
+      UIUtils.loadImageUrl(context, campaignHolder.imageView, campaign.imageUrl());
+      campaignHolder.nameView.setText(campaign.name());
+      campaignHolder.endDateView.setText(campaign.endDate().toString());
+    }
   }
 
   /**
-   * View holder
+   * Campaign holder
    */
   class CampaignHolder extends RecyclerView.ViewHolder {
 
@@ -72,6 +106,20 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Campai
     TextView endDateView;
 
     CampaignHolder(View view) {
+      super(view);
+      ButterKnife.bind(this, view);
+    }
+  }
+
+  /**
+   * Campaign status holder
+   */
+  class CampaignStatusHolder extends RecyclerView.ViewHolder {
+
+    @BindView(R.id.campaign_status)
+    TextView statusView;
+
+    CampaignStatusHolder(View view) {
       super(view);
       ButterKnife.bind(this, view);
     }

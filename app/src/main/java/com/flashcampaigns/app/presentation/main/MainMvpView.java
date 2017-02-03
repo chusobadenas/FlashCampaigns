@@ -1,6 +1,5 @@
 package com.flashcampaigns.app.presentation.main;
 
-import com.flashcampaigns.app.data.entity.Campaign;
 import com.flashcampaigns.app.presentation.base.MvpView;
 
 import java.util.List;
@@ -13,9 +12,9 @@ interface MainMvpView extends MvpView {
   /**
    * Displays the campaigns on the screen
    *
-   * @param campaigns the list of campaigns
+   * @param items the list of campaigns
    */
-  void showCampaigns(List<Campaign> campaigns);
+  void showCampaigns(List<Object> items);
 
   /**
    * Shows a view indicating there is no campaigns to show.

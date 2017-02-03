@@ -1,5 +1,7 @@
 package com.flashcampaigns.app.presentation.main;
 
+import android.content.Context;
+
 import com.flashcampaigns.app.R;
 import com.flashcampaigns.app.common.di.PerActivity;
 import com.flashcampaigns.app.common.exception.DefaultErrorBundle;
@@ -9,8 +11,10 @@ import com.flashcampaigns.app.domain.interactor.UseCase;
 import com.flashcampaigns.app.presentation.base.BasePresenter;
 import com.flashcampaigns.app.presentation.base.Presenter;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,7 +54,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     getCampaignsUseCase.execute(new CampaignsSubscriber());
   }
 
-  private final class CampaignsSubscriber extends DefaultSubscriber<List<Campaign>> {
+  final class CampaignsSubscriber extends DefaultSubscriber<List<Campaign>> {
 
     /**
      * Compare campaigns by end date
@@ -77,6 +81,55 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
       showErrorMessage(errorBundle);
     }
 
+    /**
+     * An active campaign will be any campaign that today is between start and end time.
+     *
+     * @param campaign the campaign
+     * @return true if the campaign is active, false otherwise
+     */
+    private boolean isActive(Campaign campaign) {
+      Date today = new Date();
+      Date start = campaign.startDate();
+      Date end = campaign.endDate();
+
+      return start.before(today) && end.after(today);
+    }
+
+    /**
+     * Creates a list of active and inactive campaigns
+     *
+     * @param context   the context
+     * @param campaigns the list of campaigns
+     * @return a list of active and inactive campaigns mixed
+     */
+    private List<Object> filterCampaigns(Context context, List<Campaign> campaigns) {
+      List<Object> items = new ArrayList<>();
+      List<Campaign> active = new ArrayList<>();
+      List<Campaign> inactive = new ArrayList<>();
+
+      for (Campaign campaign : campaigns) {
+        if (isActive(campaign)) {
+          active.add(campaign);
+        } else {
+          inactive.add(campaign);
+        }
+      }
+
+      // Add active campaigns
+      if (!active.isEmpty()) {
+        items.add(context.getString(R.string.campaigns_active));
+        items.addAll(active);
+      }
+
+      // Add inactive campaigns
+      if (!inactive.isEmpty()) {
+        items.add(context.getString(R.string.campaigns_inactive));
+        items.addAll(inactive);
+      }
+
+      return items;
+    }
+
     @Override
     public void onNext(List<Campaign> campaigns) {
       MainMvpView mvpView = getMvpView();
@@ -92,8 +145,11 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         // Sort campaigns by end date
         Collections.sort(campaigns, dateComparator);
 
+        // Filter campaigns (active - inactive)
+        List<Object> items = filterCampaigns(mvpView.context(), campaigns);
+
         // Set values in the view
-        mvpView.showCampaigns(campaigns);
+        mvpView.showCampaigns(items);
       }
     }
   }

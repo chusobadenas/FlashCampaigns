@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 import com.flashcampaigns.app.R;
 import com.flashcampaigns.app.common.di.components.MainComponent;
 import com.flashcampaigns.app.common.util.UIUtils;
-import com.flashcampaigns.app.data.entity.Campaign;
 import com.flashcampaigns.app.presentation.base.BaseFragment;
 
 import java.util.List;
@@ -140,9 +139,9 @@ public class MainFragment extends BaseFragment implements MainMvpView {
   }
 
   @Override
-  public void showCampaigns(List<Campaign> campaigns) {
+  public void showCampaigns(List<Object> items) {
     // Populate the list
-    CampaignAdapter adapter = new CampaignAdapter(context(), campaigns);
+    CampaignAdapter adapter = new CampaignAdapter(context(), items);
     campaignsListView.setAdapter(adapter);
     campaignsListView.setLayoutManager(new LinearLayoutManager(context()));
   }

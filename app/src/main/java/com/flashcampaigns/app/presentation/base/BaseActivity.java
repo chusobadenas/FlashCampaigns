@@ -3,7 +3,6 @@ package com.flashcampaigns.app.presentation.base;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -35,9 +34,10 @@ public abstract class BaseActivity extends AppCompatActivity {
    * @param fragment        The fragment to be added.
    */
   public void addFragment(int containerViewId, Fragment fragment) {
-    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-    fragmentTransaction.add(containerViewId, fragment);
-    fragmentTransaction.commit();
+    getSupportFragmentManager().beginTransaction()
+        .add(containerViewId, fragment)
+        .addToBackStack(null)
+        .commit();
   }
 
   /**
@@ -47,9 +47,10 @@ public abstract class BaseActivity extends AppCompatActivity {
    * @param fragment        The fragment to be added.
    */
   public void replaceFragment(int containerViewId, Fragment fragment) {
-    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-    fragmentTransaction.replace(containerViewId, fragment);
-    fragmentTransaction.commit();
+    getSupportFragmentManager().beginTransaction()
+        .replace(containerViewId, fragment)
+        .addToBackStack(null)
+        .commit();
   }
 
   /**
@@ -76,9 +77,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     switch (item.getItemId()) {
       case android.R.id.home:
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-          fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+          fragmentManager.popBackStack();
         } else {
           finish();
         }
@@ -93,10 +94,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    FragmentManager fm = getSupportFragmentManager();
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
-    if (fm.getBackStackEntryCount() > 0) {
-      fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    if (fragmentManager.getBackStackEntryCount() > 0) {
+      fragmentManager.popBackStack();
     } else {
       super.onBackPressed();
     }

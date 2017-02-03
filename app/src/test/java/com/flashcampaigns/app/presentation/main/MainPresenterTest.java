@@ -42,7 +42,7 @@ public class MainPresenterTest {
   }
 
   @Test
-  public void testInitializeSuccess() {
+  public void testLoadCampaignsSuccess() {
     mainPresenter.loadCampaigns();
     verify(getCampaigns).execute(any(DefaultSubscriber.class));
   }

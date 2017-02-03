@@ -9,8 +9,10 @@ import com.flashcampaigns.app.common.executor.PostExecutionThread;
 import com.flashcampaigns.app.common.executor.ThreadExecutor;
 import com.flashcampaigns.app.common.executor.UIThread;
 import com.flashcampaigns.app.data.repository.CampaignDataRepository;
+import com.flashcampaigns.app.data.repository.ProductDataRepository;
 import com.flashcampaigns.app.data.repository.remote.APIService;
 import com.flashcampaigns.app.domain.repository.CampaignRepository;
+import com.flashcampaigns.app.domain.repository.ProductRepository;
 
 import javax.inject.Singleton;
 
@@ -63,5 +65,11 @@ public class ApplicationModule {
   @Singleton
   public CampaignRepository provideCampaignRepository(CampaignDataRepository campaignDataRepository) {
     return campaignDataRepository;
+  }
+
+  @Provides
+  @Singleton
+  public ProductRepository provideProductRepository(ProductDataRepository productDataRepository) {
+    return productDataRepository;
   }
 }

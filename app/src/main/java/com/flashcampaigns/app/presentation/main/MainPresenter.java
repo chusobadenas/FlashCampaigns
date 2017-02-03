@@ -54,7 +54,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     getCampaignsUseCase.execute(new CampaignsSubscriber());
   }
 
-  final class CampaignsSubscriber extends DefaultSubscriber<List<Campaign>> {
+  private final class CampaignsSubscriber extends DefaultSubscriber<List<Campaign>> {
 
     /**
      * Compare campaigns by end date

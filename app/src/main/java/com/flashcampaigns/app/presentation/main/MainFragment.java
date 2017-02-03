@@ -2,6 +2,7 @@ package com.flashcampaigns.app.presentation.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -144,6 +145,7 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     CampaignAdapter adapter = new CampaignAdapter(context(), items);
     campaignsListView.setAdapter(adapter);
     campaignsListView.setLayoutManager(new LinearLayoutManager(context()));
+    campaignsListView.addItemDecoration(new DividerItemDecoration(context(), LinearLayout.VERTICAL));
   }
 
   @Override

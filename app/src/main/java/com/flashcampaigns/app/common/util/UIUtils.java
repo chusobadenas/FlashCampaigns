@@ -7,6 +7,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.flashcampaigns.app.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * UI utilities class
  */
@@ -42,5 +47,16 @@ public final class UIUtils {
    */
   public static void showToastMessage(Context context, String message) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+  }
+
+  /**
+   * Creates a string representation of the date in a pretty format
+   *
+   * @param date the date
+   * @return the string representation of the date
+   */
+  public static String showPrettyDate(Date date) {
+    DateFormat formatter = new SimpleDateFormat("MMM dd yyyy", Locale.getDefault());
+    return formatter.format(date);
   }
 }

@@ -13,6 +13,10 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.Date;
+
+import static org.junit.Assert.assertTrue;
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Toast.class)
 public class UIUtilsTest {
@@ -37,5 +41,11 @@ public class UIUtilsTest {
     PowerMockito.verifyStatic();
     Toast.makeText(context, "Hello!", Toast.LENGTH_SHORT);
     Mockito.verify(toast).show();
+  }
+
+  @Test
+  public void testShowPrettyDateSuccess() {
+    Date date = new Date(0);
+    assertTrue(UIUtils.showPrettyDate(date).contains("01 1970"));
   }
 }

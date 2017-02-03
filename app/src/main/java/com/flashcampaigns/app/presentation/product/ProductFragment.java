@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 
 import com.flashcampaigns.app.R;
@@ -33,7 +33,7 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
   ProductPresenter productPresenter;
 
   @BindView(R.id.content_product)
-  LinearLayout productView;
+  GridView productGridView;
   @BindView(R.id.rl_progress)
   RelativeLayout progressView;
   @BindView(R.id.rl_retry)
@@ -89,26 +89,26 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
 
   @Override
   public void showLoading() {
-    productView.setVisibility(View.GONE);
+    productGridView.setVisibility(View.GONE);
     progressView.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideLoading() {
     progressView.setVisibility(View.GONE);
-    productView.setVisibility(View.VISIBLE);
+    productGridView.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void showRetry() {
-    productView.setVisibility(View.GONE);
+    productGridView.setVisibility(View.GONE);
     retryView.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideRetry() {
     retryView.setVisibility(View.GONE);
-    productView.setVisibility(View.VISIBLE);
+    productGridView.setVisibility(View.VISIBLE);
   }
 
   @Override
@@ -131,7 +131,9 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
 
   @Override
   public void showProducts(List<Product> products) {
-    // TODO
+    // Populate the grid
+    ProductAdapter adapter = new ProductAdapter(context(), products);
+    productGridView.setAdapter(adapter);
   }
 
   @Override

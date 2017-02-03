@@ -37,6 +37,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
    * @param items   the list of campaigns
    */
   public CampaignAdapter(Context context, List<Object> items) {
+    super();
     this.context = context;
     this.items = items;
   }

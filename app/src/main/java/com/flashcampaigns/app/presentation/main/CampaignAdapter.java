@@ -89,7 +89,8 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       CampaignHolder campaignHolder = (CampaignHolder) holder;
       UIUtils.loadImageUrl(context, campaignHolder.imageView, campaign.imageUrl());
       campaignHolder.nameView.setText(campaign.name());
-      campaignHolder.endDateView.setText(campaign.endDate().toString());
+      campaignHolder.datesView.setText(UIUtils.showPrettyDate(campaign.startDate()) + " - " + UIUtils.showPrettyDate
+          (campaign.endDate()));
     }
   }
 
@@ -102,8 +103,8 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     ImageView imageView;
     @BindView(R.id.campaign_name)
     TextView nameView;
-    @BindView(R.id.campaign_end_date)
-    TextView endDateView;
+    @BindView(R.id.campaign_dates)
+    TextView datesView;
 
     CampaignHolder(View view) {
       super(view);

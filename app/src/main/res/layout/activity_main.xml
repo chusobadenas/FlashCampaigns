@@ -21,6 +21,6 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_light_grey"/>
+        android:background="@color/bg_dark_grey"/>
   </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -29,7 +29,7 @@ public final class UIUtils {
     Glide.with(context)
         .load(url)
         .centerCrop()
-        .placeholder(R.color.bg_light_grey)
+        .placeholder(R.color.bg_dark_grey)
         .crossFade()
         .into(view);
   }

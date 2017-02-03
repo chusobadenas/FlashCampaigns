@@ -1,6 +1,7 @@
 package com.flashcampaigns.app.presentation.main;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.flashcampaigns.app.R;
 import com.flashcampaigns.app.common.util.UIUtils;
 import com.flashcampaigns.app.data.entity.Campaign;
+import com.flashcampaigns.app.presentation.product.ProductFragment;
 
 import java.util.List;
 
@@ -91,6 +93,31 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       campaignHolder.nameView.setText(campaign.name());
       campaignHolder.datesView.setText(UIUtils.showPrettyDate(campaign.startDate()) + " - " + UIUtils.showPrettyDate
           (campaign.endDate()));
+      // Click item
+      campaignHolder.itemView.setOnClickListener(new CampaignClickListener(campaign.id()));
+    }
+  }
+
+  /**
+   * Campaign click listener
+   */
+  private class CampaignClickListener implements View.OnClickListener {
+
+    private final int campaignId;
+
+    CampaignClickListener(int campaignId) {
+      this.campaignId = campaignId;
+    }
+
+    @Override
+    public void onClick(View view) {
+      // Create fragment
+      ProductFragment productFragment = ProductFragment.newInstance();
+      Bundle bundle = new Bundle();
+      bundle.putInt("campaignId", campaignId);
+      productFragment.setArguments(bundle);
+      // Call fragment
+      ((MainActivity) context).replaceFragment(R.id.fragmentContainer, productFragment);
     }
   }
 

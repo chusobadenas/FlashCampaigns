@@ -78,6 +78,19 @@
     <item name="android:textStyle">italic</item>
   </style>
 
+  <style name="MyAppTheme.CardPrice">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textSize">18sp</item>
+  </style>
+
+  <style name="MyAppTheme.CardDescription">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
   <style name="MySplashTheme" parent="Theme.AppCompat.NoActionBar">
     <item name="android:windowBackground">@drawable/background_splash</item>
   </style>

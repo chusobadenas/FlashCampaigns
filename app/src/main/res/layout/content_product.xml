@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<GridView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-</LinearLayout>
+    android:columnWidth="180dp"
+    android:gravity="center"
+    android:horizontalSpacing="8dp"
+    android:numColumns="auto_fit"
+    android:scrollbars="vertical"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="8dp"/>

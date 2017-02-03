@@ -33,10 +33,9 @@
         tools:text="My Campaign"/>
 
     <TextView
-        android:id="@+id/campaign_end_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/campaign_dates"
+        style="@style/MyAppTheme.CardSubtitle"
         android:layout_below="@+id/campaign_name"
-        tools:text="01-01-2020"/>
+        tools:text="Jan 01 2016 - Jan 01 2017"/>
   </RelativeLayout>
 </android.support.v7.widget.CardView>

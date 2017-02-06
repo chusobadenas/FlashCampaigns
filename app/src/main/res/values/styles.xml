@@ -25,6 +25,7 @@
 
   <style name="MyAppTheme.ActionBar" parent="MyAppTheme">
     <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="colorControlNormal">@android:color/white</item>
     <item name="drawerArrowStyle">@style/HamburgerIconStyle</item>
     <item name="android:itemTextAppearance">@style/OptionsMenuTextColor</item>
   </style>
@@ -44,7 +45,7 @@
   </style>
 
   <style name="OptionsMenuTextColor" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
-    <item name="android:textColor">@android:color/black</item>
+    <item name="android:textColor">@android:color/white</item>
   </style>
 
   <style name="MyAppTheme.ProgressBar">

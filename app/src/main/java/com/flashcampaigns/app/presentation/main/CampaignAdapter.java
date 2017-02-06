@@ -92,10 +92,12 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       CampaignHolder campaignHolder = (CampaignHolder) holder;
       UIUtils.loadImageUrl(context, campaignHolder.imageView, campaign.imageUrl());
       campaignHolder.nameView.setText(campaign.name());
-      campaignHolder.datesView.setText(UIUtils.showPrettyDate(campaign.startDate()) + " - " + UIUtils.showPrettyDate
-          (campaign.endDate()));
-      // Click item
-      campaignHolder.itemView.setOnClickListener(new CampaignClickListener(campaign));
+      campaignHolder.datesView.setText(UIUtils.showPrettyDate(campaign.startDate()) + " - " +
+          UIUtils.showPrettyDate(campaign.endDate()));
+      // Clickable only if it is active
+      if (CampaignUtils.isActive(campaign)) {
+        campaignHolder.itemView.setOnClickListener(new CampaignClickListener(campaign));
+      }
     }
   }
 

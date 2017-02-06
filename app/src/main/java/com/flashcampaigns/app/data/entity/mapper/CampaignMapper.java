@@ -38,7 +38,7 @@ public class CampaignMapper {
       String name = campaignResponse.name();
       String imageUrl = campaignResponse.imageUrl();
 
-      DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
+      DateFormat formatter = new SimpleDateFormat("yyyy-dd-MM", Locale.getDefault());
       Date startDate = formatter.parse(campaignResponse.startDate());
       Date endDate = formatter.parse(campaignResponse.endDate());
 

@@ -18,18 +18,19 @@ public class CampaignMapperTest {
 
   @Test
   public void testTransformCampaignSuccess() {
-    DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
+    DateFormat formatter = new SimpleDateFormat("yyyy-dd-MM", Locale.getDefault());
     CampaignMapper mapper = new CampaignMapper();
 
     try {
-      CampaignResponse campaignResponse = CampaignResponse.create(1, "My campaign", "01-01-2017", "01-01-2018", "url");
+      CampaignResponse campaignResponse = CampaignResponse.create(1, "My campaign", "2017-01-01",
+          "2017-31-12", "url");
       Campaign campaign = mapper.transform(campaignResponse);
 
       assertNotNull(campaign);
       assertEquals(campaign.id(), 1);
       assertEquals(campaign.name(), "My campaign");
-      assertEquals(campaign.startDate().getTime(), formatter.parse("01-01-2017").getTime());
-      assertEquals(campaign.endDate().getTime(), formatter.parse("01-01-2018").getTime());
+      assertEquals(campaign.startDate().getTime(), formatter.parse("2017-01-01").getTime());
+      assertEquals(campaign.endDate().getTime(), formatter.parse("2017-31-12").getTime());
       assertEquals(campaign.imageUrl(), "url");
 
     } catch (ParseException exception) {

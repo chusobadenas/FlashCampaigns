@@ -3,15 +3,20 @@ package com.flashcampaigns.app.presentation.product;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.flashcampaigns.app.R;
 import com.flashcampaigns.app.common.di.components.MainComponent;
 import com.flashcampaigns.app.common.util.UIUtils;
+import com.flashcampaigns.app.data.entity.Campaign;
 import com.flashcampaigns.app.data.entity.Product;
 import com.flashcampaigns.app.presentation.base.BaseFragment;
 
@@ -33,13 +38,19 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
   ProductPresenter productPresenter;
 
   @BindView(R.id.content_product)
-  GridView productGridView;
+  LinearLayout productView;
+  @BindView(R.id.products_list)
+  RecyclerView productListView;
+  @BindView(R.id.products_title_campaign)
+  TextView productCampaignTitleView;
+  @BindView(R.id.products_image_campaign)
+  ImageView productCampaignImageView;
   @BindView(R.id.rl_progress)
   RelativeLayout progressView;
   @BindView(R.id.rl_retry)
   RelativeLayout retryView;
 
-  private int campaignId;
+  private Campaign campaign;
   private Unbinder unbinder;
 
   /**
@@ -66,7 +77,7 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    this.campaignId = getArguments().getInt("campaignId");
+    this.campaign = (Campaign) getArguments().getSerializable("campaign");
   }
 
   @Override
@@ -89,26 +100,26 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
 
   @Override
   public void showLoading() {
-    productGridView.setVisibility(View.GONE);
+    productView.setVisibility(View.GONE);
     progressView.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideLoading() {
     progressView.setVisibility(View.GONE);
-    productGridView.setVisibility(View.VISIBLE);
+    productView.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void showRetry() {
-    productGridView.setVisibility(View.GONE);
+    productView.setVisibility(View.GONE);
     retryView.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideRetry() {
     retryView.setVisibility(View.GONE);
-    productGridView.setVisibility(View.VISIBLE);
+    productView.setVisibility(View.VISIBLE);
   }
 
   @Override
@@ -126,14 +137,18 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
    * Loads the list of products
    */
   private void loadProducts() {
-    productPresenter.loadProducts(campaignId);
+    productPresenter.loadProducts(campaign.id());
   }
 
   @Override
   public void showProducts(List<Product> products) {
-    // Populate the grid
+    // First display the title and the image of the campaign
+    productCampaignTitleView.setText(campaign.name());
+    UIUtils.loadImageUrl(context(), productCampaignImageView, campaign.imageUrl());
+    // Populate the list
     ProductAdapter adapter = new ProductAdapter(context(), products);
-    productGridView.setAdapter(adapter);
+    productListView.setAdapter(adapter);
+    productListView.setLayoutManager(new LinearLayoutManager(context()));
   }
 
   @Override

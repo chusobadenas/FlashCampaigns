@@ -95,7 +95,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       campaignHolder.datesView.setText(UIUtils.showPrettyDate(campaign.startDate()) + " - " + UIUtils.showPrettyDate
           (campaign.endDate()));
       // Click item
-      campaignHolder.itemView.setOnClickListener(new CampaignClickListener(campaign.id()));
+      campaignHolder.itemView.setOnClickListener(new CampaignClickListener(campaign));
     }
   }
 
@@ -104,10 +104,10 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
    */
   private class CampaignClickListener implements View.OnClickListener {
 
-    private final int campaignId;
+    private final Campaign campaign;
 
-    CampaignClickListener(int campaignId) {
-      this.campaignId = campaignId;
+    CampaignClickListener(Campaign campaign) {
+      this.campaign = campaign;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       // Create fragment
       ProductFragment productFragment = ProductFragment.newInstance();
       Bundle bundle = new Bundle();
-      bundle.putInt("campaignId", campaignId);
+      bundle.putSerializable("campaign", campaign);
       productFragment.setArguments(bundle);
       // Call fragment
       ((MainActivity) context).replaceFragment(R.id.fragmentContainer, productFragment);

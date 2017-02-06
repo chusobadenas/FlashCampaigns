@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -156,6 +157,7 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
     ProductAdapter adapter = new ProductAdapter(context(), products);
     productListView.setAdapter(adapter);
     productListView.setLayoutManager(new LinearLayoutManager(context()));
+    productListView.addItemDecoration(new DividerItemDecoration(context(), LinearLayout.VERTICAL));
   }
 
   @Override

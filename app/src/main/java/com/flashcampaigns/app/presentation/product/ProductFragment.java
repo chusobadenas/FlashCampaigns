@@ -3,6 +3,7 @@ package com.flashcampaigns.app.presentation.product;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.flashcampaigns.app.R;
 import com.flashcampaigns.app.common.di.components.MainComponent;
@@ -19,6 +19,7 @@ import com.flashcampaigns.app.common.util.UIUtils;
 import com.flashcampaigns.app.data.entity.Campaign;
 import com.flashcampaigns.app.data.entity.Product;
 import com.flashcampaigns.app.presentation.base.BaseFragment;
+import com.flashcampaigns.app.presentation.main.MainActivity;
 
 import java.util.List;
 
@@ -41,8 +42,6 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
   LinearLayout productView;
   @BindView(R.id.products_list)
   RecyclerView productListView;
-  @BindView(R.id.products_title_campaign)
-  TextView productCampaignTitleView;
   @BindView(R.id.products_image_campaign)
   ImageView productCampaignImageView;
   @BindView(R.id.rl_progress)
@@ -77,7 +76,16 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
+    // Get campaign
     this.campaign = (Campaign) getArguments().getSerializable("campaign");
+
+    ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+    if (actionBar != null) {
+      // Change title
+      actionBar.setTitle(campaign.name());
+      // Enable back button
+      actionBar.setDisplayHomeAsUpEnabled(true);
+    }
   }
 
   @Override
@@ -142,8 +150,7 @@ public class ProductFragment extends BaseFragment implements ProductMvpView {
 
   @Override
   public void showProducts(List<Product> products) {
-    // First display the title and the image of the campaign
-    productCampaignTitleView.setText(campaign.name());
+    // First display the image of the campaign
     UIUtils.loadImageUrl(context(), productCampaignImageView, campaign.imageUrl());
     // Populate the list
     ProductAdapter adapter = new ProductAdapter(context(), products);

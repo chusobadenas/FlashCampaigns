@@ -2,6 +2,8 @@ package com.flashcampaigns.app.presentation.main;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +67,19 @@ public class MainFragment extends BaseFragment implements MainMvpView {
     unbinder = ButterKnife.bind(this, fragmentView);
     mainPresenter.attachView(this);
     return fragmentView;
+  }
+
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+
+    ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+    if (actionBar != null) {
+      // Change title
+      actionBar.setTitle(R.string.app_name);
+      // Disable back button
+      actionBar.setDisplayHomeAsUpEnabled(false);
+    }
   }
 
   @Override

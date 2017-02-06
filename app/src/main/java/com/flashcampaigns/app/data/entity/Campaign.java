@@ -5,13 +5,14 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Represents a campaign.
  */
 @AutoValue
-public abstract class Campaign {
+public abstract class Campaign implements Serializable {
 
   @SerializedName("id")
   public abstract int id();

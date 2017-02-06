@@ -1,7 +1,5 @@
 package com.flashcampaigns.app.presentation.product;
 
-import android.view.View;
-
 import com.flashcampaigns.app.AndroidApplicationTest;
 import com.flashcampaigns.app.BuildConfig;
 import com.flashcampaigns.app.data.entity.Product;
@@ -32,32 +30,22 @@ public class ProductAdapterTest {
   }
 
   @Test
-  public void testGetCountSuccess() {
-    assertEquals(adapter.getCount(), 1);
+  public void testGetItemCountSuccess() {
+    assertEquals(adapter.getItemCount(), 1);
   }
 
   @Test
-  public void testGetItemSuccess() {
-    Product item = adapter.getItem(0);
-
-    assertNotNull(item);
-    assertEquals(item.name(), "My product");
-    assertEquals(item.description(), "Awesome product");
-    assertEquals(item.imageUrl(), "url");
-    assertEquals(item.price(), Double.valueOf(5.0));
-    assertEquals(item.listPrice(), Double.valueOf(5.0));
+  public void testOnCreateProductViewHolderSuccess() {
+    ProductAdapter.ProductViewHolder holder = adapter.onCreateViewHolder(null, 0);
+    assertNotNull(holder);
   }
 
   @Test
-  public void testGetItemIdSuccess() {
-    assertEquals(adapter.getItemId(0), 0);
-  }
+  public void testOnBindProductViewHolder() {
+    ProductAdapter.ProductViewHolder holder = adapter.onCreateViewHolder(null, 0);
 
-  @Test
-  public void testGetViewFirstTime() {
     try {
-      View view = adapter.getView(0, null, null);
-      assertNotNull(view);
+      adapter.onBindViewHolder(holder, 0);
     } catch (Exception exception) {
       fail(exception.getMessage());
     }

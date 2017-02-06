@@ -36,7 +36,6 @@ public abstract class BaseActivity extends AppCompatActivity {
   public void addFragment(int containerViewId, Fragment fragment) {
     getSupportFragmentManager().beginTransaction()
         .add(containerViewId, fragment)
-        .addToBackStack(null)
         .commit();
   }
 

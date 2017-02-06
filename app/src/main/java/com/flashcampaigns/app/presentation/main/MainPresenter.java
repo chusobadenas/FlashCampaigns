@@ -14,7 +14,6 @@ import com.flashcampaigns.app.presentation.base.Presenter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -82,20 +81,6 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     }
 
     /**
-     * An active campaign will be any campaign that today is between start and end time.
-     *
-     * @param campaign the campaign
-     * @return true if the campaign is active, false otherwise
-     */
-    private boolean isActive(Campaign campaign) {
-      Date today = new Date();
-      Date start = campaign.startDate();
-      Date end = campaign.endDate();
-
-      return start.before(today) && end.after(today);
-    }
-
-    /**
      * Creates a list of active and inactive campaigns
      *
      * @param context   the context
@@ -108,7 +93,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
       List<Campaign> inactive = new ArrayList<>();
 
       for (Campaign campaign : campaigns) {
-        if (isActive(campaign)) {
+        if (CampaignUtils.isActive(campaign)) {
           active.add(campaign);
         } else {
           inactive.add(campaign);
